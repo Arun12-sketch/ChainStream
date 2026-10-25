@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: chainstream-config
+  namespace: chainstream
+data:
+  APP_ENV: "production"
+  METRICS_PORT: "9090"
+  KAFKA_BROKERS: "chainstream-msk-b1.internal:9092,chainstream-msk-b2.internal:9092"
+  REDIS_URL: "redis://chainstream-redis.internal:6379"
+  ETH_SEPOLIA_RPC: "https://ethereum-sepolia-rpc.publicnode.com"
+  BASE_SEPOLIA_RPC: "https://sepolia.base.org"
+  POLYGON_AMOY_RPC: "https://rpc-amoy.polygon.technology"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: chainstream-secrets
+  namespace: chainstream
+type: Opaque
+stringData:
+  DATABASE_URL: "postgres://chainstream_app:StrongSecretPass123!@chainstream-rds.internal:5432/chainstream?sslmode=require"

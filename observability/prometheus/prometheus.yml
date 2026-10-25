@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'chainstream-indexer-rust'
+    static_configs:
+      - targets: ['indexer:9090']
+
+  - job_name: 'chainstream-event-processor'
+    static_configs:
+      - targets: ['processor:9091']
+
+  - job_name: 'chainstream-api-go'
+    static_configs:
+      - targets: ['api:8080']

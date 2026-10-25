@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chainstream-dashboard
+  namespace: chainstream
+  labels:
+    app: chainstream-dashboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: chainstream-dashboard
+  template:
+    metadata:
+      labels:
+        app: chainstream-dashboard
+    spec:
+      containers:
+        - name: dashboard
+          image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/chainstream/dashboard:v1.0.0
+          ports:
+            - containerPort: 3000
+              name: http
+          env:
+            - name: NEXT_PUBLIC_API_URL
+              value: "https://api.chainstream.internal"
+            - name: NEXT_PUBLIC_WS_URL
+              value: "wss://api.chainstream.internal/api/v1/ws"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chainstream-dashboard
+  namespace: chainstream
+spec:
+  type: ClusterIP
+  selector:
+    app: chainstream-dashboard
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000

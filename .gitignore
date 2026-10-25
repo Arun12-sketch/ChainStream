@@ -1,0 +1,18 @@
+# Compiled binaries & build artifacts
+target/
+services/api-go/server
+*.log
+
+# Node & Next.js
+node_modules/
+services/dashboard/node_modules/
+services/dashboard/.next/
+services/dashboard/out/
+
+# Environment files
+.env
+.env.local
+
+# OS files
+.DS_Store
+Thumbs.db

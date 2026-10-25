@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReorgMessage",
+  "type": "object",
+  "properties": {
+    "version": { "type": "string", "enum": ["v1"] },
+    "chain_id": { "type": "integer" },
+    "detected_at": { "type": "integer" },
+    "from_block": { "type": "integer" },
+    "to_block": { "type": "integer" },
+    "orphaned_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "canonical_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "ancestor_block": { "type": "integer" },
+    "ancestor_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "affected_blocks_count": { "type": "integer" }
+  },
+  "required": [
+    "version",
+    "chain_id",
+    "detected_at",
+    "from_block",
+    "to_block",
+    "orphaned_hash",
+    "canonical_hash",
+    "ancestor_block",
+    "ancestor_hash",
+    "affected_blocks_count"
+  ]
+}

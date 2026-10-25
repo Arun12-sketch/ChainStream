@@ -1,0 +1,72 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "title": "Blocks Indexed per Second",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "rate(chainstream_blocks_indexed_total[1m])",
+          "legendFormat": "Chain {{chain_id}}"
+        }
+      ]
+    },
+    {
+      "title": "Decoded Events Throughput",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "expr": "rate(chainstream_events_decoded_total[1m])",
+          "legendFormat": "Chain {{chain_id}}"
+        }
+      ]
+    },
+    {
+      "title": "Indexing Lag Behind Chain Head (Blocks)",
+      "type": "gauge",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "expr": "chainstream_lag_blocks",
+          "legendFormat": "Chain {{chain_id}}"
+        }
+      ]
+    },
+    {
+      "title": "Detected Chain Reorganizations",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 8 },
+      "targets": [
+        {
+          "expr": "chainstream_reorg_count_total",
+          "legendFormat": "Chain {{chain_id}}"
+        }
+      ]
+    },
+    {
+      "title": "Kafka Consumer Lag",
+      "type": "gauge",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 8 },
+      "targets": [
+        {
+          "expr": "chainstream_processor_kafka_lag",
+          "legendFormat": "Processor Lag"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": ["blockchain", "indexer", "chainstream"],
+  "time": { "from": "now-1h", "to": "now" },
+  "title": "ChainStream Cluster Metrics",
+  "uid": "chainstream-core"
+}

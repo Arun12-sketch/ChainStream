@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "services/indexer-rust",
+    "services/event-processor-rust",
+]
+resolver = "2"

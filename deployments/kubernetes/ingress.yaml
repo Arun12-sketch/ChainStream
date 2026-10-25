@@ -1,0 +1,69 @@
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: chainstream-api-hpa
+  namespace: chainstream
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: chainstream-api
+  minReplicas: 3
+  maxReplicas: 15
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: chainstream-api-pdb
+  namespace: chainstream
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: chainstream-api
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: chainstream-ingress
+  namespace: chainstream
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    nginx.ingress.kubernetes.io/websocket-services: "chainstream-api"
+spec:
+  tls:
+    - hosts:
+        - api.chainstream.internal
+        - app.chainstream.internal
+      secretName: chainstream-tls-cert
+  rules:
+    - host: api.chainstream.internal
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: chainstream-api
+                port:
+                  number: 8080
+    - host: app.chainstream.internal
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: chainstream-dashboard
+                port:
+                  number: 3000

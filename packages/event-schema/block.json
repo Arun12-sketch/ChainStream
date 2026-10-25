@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BlockMessage",
+  "type": "object",
+  "properties": {
+    "version": { "type": "string", "enum": ["v1"] },
+    "chain_id": { "type": "integer" },
+    "block_number": { "type": "integer" },
+    "block_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "parent_hash": { "type": "string", "pattern": "^0x[0-9a-fA-F]{64}$" },
+    "timestamp": { "type": "integer" },
+    "tx_count": { "type": "integer" },
+    "gas_used": { "type": "string" },
+    "gas_limit": { "type": "string" },
+    "base_fee_per_gas": { "type": "string" },
+    "is_canonical": { "type": "boolean" },
+    "confirmation_depth": { "type": "integer" }
+  },
+  "required": ["version", "chain_id", "block_number", "block_hash", "parent_hash", "timestamp", "tx_count", "is_canonical"]
+}

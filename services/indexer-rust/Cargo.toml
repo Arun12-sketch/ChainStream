@@ -1,0 +1,26 @@
+[package]
+name = "indexer-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.38", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+tokio-postgres = { version = "0.7", features = ["with-chrono-0_4", "with-serde_json-1"] }
+chrono = { version = "0.4", features = ["serde"] }
+redis = { version = "0.25", features = ["tokio-comp"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+prometheus = "0.13"
+tiny-keccak = { version = "2.0", features = ["keccak"] }
+hex = "0.4"
+futures-util = "0.3"
+uuid = { version = "1.8", features = ["v4", "serde"] }
+rskafka = "0.5"
+axum = "0.7"
+tokio-tungstenite = { version = "0.23", features = ["rustls-tls-webpki-roots"] }
+rand = "0.8"
+thiserror = "1.0"
+async-trait = "0.1"
