@@ -28,6 +28,7 @@ echo "✓ Go API Gateway compiled and passed all unit tests."
 
 echo "4. Validating Next.js Control Center Dashboard Build..."
 cd "${ROOT_DIR}/services/dashboard"
+npm ci
 npm run build
 echo "✓ Next.js dashboard compiled 14/14 static and dynamic routes cleanly."
 
