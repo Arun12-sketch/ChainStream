@@ -159,7 +159,7 @@ make dev
 
 ## Running Tests
 
-Run the complete automated test suite across Rust, Go, and the Reorganization engine:
+Run the complete automated test suite across Rust, Go, real-time webSocket and the Reorganization engine:
 
 ```bash
 # Run all unit and integration tests
